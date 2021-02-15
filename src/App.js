@@ -1,4 +1,4 @@
-import "./App.css";
+import classes from "./App.module.css";
 import React, { useState } from "react";
 import axios from "axios";
 import { ReactJewishDatePicker, BasicJewishDay } from "react-jewish-datepicker";
@@ -48,19 +48,23 @@ function App() {
                     .then((res) => setOutput(res.data.hebrew));
             }
         } else if (basicJewishDay) {
-            const fixedDate = inputHebrewDateHandler(basicJewishDay.date.toString());
-            setOutput(fixedDate.day + ' ' + fixedDate.month + ' ' + fixedDate.year)
+            const fixedDate = inputHebrewDateHandler(
+                basicJewishDay.date.toString()
+            );
+            setOutput(
+                fixedDate.day + " " + fixedDate.month + " " + fixedDate.year
+            );
         } else {
             setError("NO CORRECT DATE FORMAT CHOSEN!");
         }
     };
 
-
     // handles change convert modes
     const changeHandler = () => {
         setToHebrew(!toHebrew);
-        setOutput('');
-        setError('');
+        setOutput("");
+        setError("");
+        setBasicJewishDay("");
     };
 
     let format = (
@@ -74,28 +78,38 @@ function App() {
 
     if (!toHebrew) {
         format = (
-            <ReactJewishDatePicker
-                value={new Date()}
-                isHebrew
-                onClick={(day) => {
-                    setBasicJewishDay(day);
-                }}
-            />
+            <div className={classes.HebForm}>
+                <ReactJewishDatePicker
+                    className={classes.Heb}
+                    value={new Date()}
+                    isHebrew
+                    onClick={(day) => {
+                        setBasicJewishDay(day);
+                    }}
+                />{" "}
+            </div>
         );
     }
 
     return (
-        <div className="App">
-            <h1>Convert your date</h1>
-            {error}
-            {format}
-            <button onClick={convertHandler}>Convert</button>
-            <div>{output}</div>
-            <div>{date}</div>
-            <button onClick={changeHandler}>
-                {" "}
-                {toHebrew ? "Jewish TO Gregorain" : "Gregorain TO Jewish"}
-            </button>
+        <div className={classes.App}>
+            <div className={classes.Form}>
+                <div className={classes.Error}>{error}</div>
+                <h1>Convert your date</h1>
+
+                {format}
+                <div className={classes.Convert} onClick={convertHandler}>
+                    Convert
+                </div>
+
+                <div className={classes.Switcher} onClick={changeHandler}>
+                    {" "}
+                    {toHebrew ? "Jewish TO Gregorain" : "Gregorain TO Jewish"}
+                </div>
+            </div>
+            <div className={classes.Output}>
+                <div className={classes.Arrow}></div> <div className={classes.OutputDate}>{output}</div>
+            </div>
         </div>
     );
 }
