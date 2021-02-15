@@ -116,7 +116,18 @@
   background-position: center;
   background-image: 200px;
   background-size: 100px;
+  position: relative;
+  left: -100px;
+  z-index: -5;
+  transition: all .4s linear;
+
 }
+
+.ArrowReveal{
+  left: 0px;
+  transition: all .6s linear;
+}
+
 
 .Output{
   display: flex;

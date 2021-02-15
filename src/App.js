@@ -10,6 +10,8 @@ function App() {
     const [error, setError] = useState("");
     const [afterSunshine, setAfterSunshine] = useState("");
     const [basicJewishDay, setBasicJewishDay] = useState("");
+    const [showArrow, setShowArrow] = useState(false);
+
 
     const inputDateHandler = (inputDate) => {
         const date = {};
@@ -29,6 +31,7 @@ function App() {
     };
     const convertHandler = () => {
         if (date !== "") {
+            setShowArrow(true);
             setError("");
 
             if (toHebrew) {
@@ -48,6 +51,8 @@ function App() {
                     .then((res) => setOutput(res.data.hebrew));
             }
         } else if (basicJewishDay) {
+            setShowArrow(true);
+
             const fixedDate = inputHebrewDateHandler(
                 basicJewishDay.date.toString()
             );
@@ -62,6 +67,7 @@ function App() {
     // handles change convert modes
     const changeHandler = () => {
         setToHebrew(!toHebrew);
+        setShowArrow(false);
         setOutput("");
         setError("");
         setBasicJewishDay("");
@@ -92,6 +98,12 @@ function App() {
         );
     }
 
+    let arrow_animation = classes.Arrow;
+
+    if(showArrow){
+        arrow_animation = [classes.Arrow, classes.ArrowReveal].join(' ');
+    }
+
     return (
         <div className={classes.App}>
             <div className={classes.Form}>
@@ -109,7 +121,7 @@ function App() {
                 </div>
             </div>
             <div className={classes.Output}>
-                <div className={classes.Arrow}></div> <div className={classes.OutputDate}>{output}</div>
+                <div className={arrow_animation}></div> <div className={classes.OutputDate}>{output}</div>
             </div>
         </div>
     );
