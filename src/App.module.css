@@ -43,7 +43,15 @@
   position: relative;
   width: 30vw;
   background: rgb(233, 233, 233);
+  transition: all 0.2s linear;
 }
+
+
+.FormSwipe {
+  transform: rotateY(360deg);
+  transition: all 0.2s linear;
+}
+
 
 .Form  .Heb div{
   /* width: 200px; */
@@ -119,6 +127,7 @@
   position: relative;
   left: -100px;
   z-index: -5;
+  opacity: 0;
   transition: all .4s linear;
 
 }
@@ -126,6 +135,7 @@
 .ArrowReveal{
   left: 0px;
   transition: all .6s linear;
+  opacity: 1;
 }
 
 

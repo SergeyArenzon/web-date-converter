@@ -104,9 +104,14 @@ function App() {
         arrow_animation = [classes.Arrow, classes.ArrowReveal].join(' ');
     }
 
+    let swipe_animation = classes.Form;
+    if(!toHebrew){
+        swipe_animation = [classes.Form, classes.FormSwipe].join(' ');
+    }
+
     return (
         <div className={classes.App}>
-            <div className={classes.Form}>
+            <div className={swipe_animation}>
                 <div className={classes.Error}>{error}</div>
                 <h1>Convert your date</h1>
 
