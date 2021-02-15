@@ -7,7 +7,7 @@ function App() {
     const [isHebrew, setIsHenrew] = useState(true);
     const [date, setDate] = useState("");
     const [output, setOutput] = useState("");
-    const [err, setError] = useState("");
+    const [error, setError] = useState("");
     const [afterSunshine, setAfterSunshine] = useState("");
 
     const inputDateHandler = (inputDate) => {
@@ -21,9 +21,8 @@ function App() {
 
     const convertHandler = () => {
         if (date !== "") {
+            setError('');
             const fixedDate = inputDateHandler(date);
-
-
 
             axios
                 .get(
@@ -36,12 +35,16 @@ function App() {
                         "&g2h=1"
                 )
                 .then((res) => setOutput(res.data.hebrew));
+        } else {
+
+            setError('NO CORRECT DATE FORMAT CHOSEN!');
         }
     };
 
     return (
         <div className="App">
             <h1>Convert your date</h1>
+            {error}
             <input
                 type="date"
                 onChange={(event) => setDate(event.target.value)}
