@@ -65,6 +65,7 @@ function App() {
         setOutput("");
         setError("");
         setBasicJewishDay("");
+        setDate('');
     };
 
     let format = (
